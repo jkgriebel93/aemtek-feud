@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Feud</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Title Screen -->
+        <div id="title-screen" class="screen active">
+            <div class="title-logo">
+                <h1>FAMILY</h1>
+                <h1>FEUD</h1>
+            </div>
+            <div class="team-setup">
+                <div class="team-input">
+                    <label for="team1-name">Team 1 Name:</label>
+                    <input type="text" id="team1-name" value="Team 1" maxlength="15">
+                </div>
+                <div class="team-input">
+                    <label for="team2-name">Team 2 Name:</label>
+                    <input type="text" id="team2-name" value="Team 2" maxlength="15">
+                </div>
+            </div>
+            <button id="start-game" class="big-button">START GAME</button>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <!-- Scoreboard -->
+            <div class="scoreboard">
+                <div class="team team1" id="team1-display">
+                    <div class="team-name" id="team1-label">Team 1</div>
+                    <div class="team-score" id="team1-score">0</div>
+                    <div class="control-indicator" id="team1-control"></div>
+                </div>
+                <div class="round-info">
+                    <div class="round-number">Round <span id="round-number">1</span></div>
+                    <div class="round-points">Points: <span id="round-points">0</span></div>
+                </div>
+                <div class="team team2" id="team2-display">
+                    <div class="team-name" id="team2-label">Team 2</div>
+                    <div class="team-score" id="team2-score">0</div>
+                    <div class="control-indicator" id="team2-control"></div>
+                </div>
+            </div>
+
+            <!-- Strikes Display -->
+            <div class="strikes-container">
+                <div class="strike" id="strike1">X</div>
+                <div class="strike" id="strike2">X</div>
+                <div class="strike" id="strike3">X</div>
+            </div>
+
+            <!-- Question Display -->
+            <div class="question-container">
+                <div class="question-text" id="question-text">Press "New Round" to start!</div>
+            </div>
+
+            <!-- Answer Board -->
+            <div class="answer-board" id="answer-board">
+                <div class="answer-row" data-index="0">
+                    <div class="answer-number">1</div>
+                    <div class="answer-text">???</div>
+                    <div class="answer-points">??</div>
+                </div>
+                <div class="answer-row" data-index="1">
+                    <div class="answer-number">2</div>
+                    <div class="answer-text">???</div>
+                    <div class="answer-points">??</div>
+                </div>
+                <div class="answer-row" data-index="2">
+                    <div class="answer-number">3</div>
+                    <div class="answer-text">???</div>
+                    <div class="answer-points">??</div>
+                </div>
+                <div class="answer-row" data-index="3">
+                    <div class="answer-number">4</div>
+                    <div class="answer-text">???</div>
+                    <div class="answer-points">??</div>
+                </div>
+                <div class="answer-row" data-index="4">
+                    <div class="answer-number">5</div>
+                    <div class="answer-text">???</div>
+                    <div class="answer-points">??</div>
+                </div>
+                <div class="answer-row" data-index="5">
+                    <div class="answer-number">6</div>
+                    <div class="answer-text">???</div>
+                    <div class="answer-points">??</div>
+                </div>
+                <div class="answer-row" data-index="6">
+                    <div class="answer-number">7</div>
+                    <div class="answer-text">???</div>
+                    <div class="answer-points">??</div>
+                </div>
+                <div class="answer-row" data-index="7">
+                    <div class="answer-number">8</div>
+                    <div class="answer-text">???</div>
+                    <div class="answer-points">??</div>
+                </div>
+            </div>
+
+            <!-- Guess Input -->
+            <div class="guess-container">
+                <input type="text" id="guess-input" placeholder="Enter your guess..." maxlength="50">
+                <button id="submit-guess" class="action-button">GUESS</button>
+            </div>
+
+            <!-- Host Controls -->
+            <div class="host-controls">
+                <button id="new-round" class="control-button">New Round</button>
+                <button id="switch-team" class="control-button">Switch Team</button>
+                <button id="add-strike" class="control-button strike-btn">Add Strike</button>
+                <button id="award-points" class="control-button">Award Points</button>
+                <button id="reveal-all" class="control-button">Reveal All</button>
+            </div>
+
+            <!-- Manual Answer Reveal -->
+            <div class="manual-reveal">
+                <span>Click answer to reveal:</span>
+                <div class="reveal-buttons" id="reveal-buttons">
+                    <button class="reveal-btn" data-index="0">1</button>
+                    <button class="reveal-btn" data-index="1">2</button>
+                    <button class="reveal-btn" data-index="2">3</button>
+                    <button class="reveal-btn" data-index="3">4</button>
+                    <button class="reveal-btn" data-index="4">5</button>
+                    <button class="reveal-btn" data-index="5">6</button>
+                    <button class="reveal-btn" data-index="6">7</button>
+                    <button class="reveal-btn" data-index="7">8</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Winner Screen -->
+        <div id="winner-screen" class="screen">
+            <div class="winner-announcement">
+                <h2>GAME OVER!</h2>
+                <h1 id="winner-name">Team 1 Wins!</h1>
+                <div class="final-scores">
+                    <div class="final-score">
+                        <span id="final-team1-name">Team 1</span>
+                        <span id="final-team1-score">0</span>
+                    </div>
+                    <div class="final-score">
+                        <span id="final-team2-name">Team 2</span>
+                        <span id="final-team2-score">0</span>
+                    </div>
+                </div>
+                <button id="play-again" class="big-button">PLAY AGAIN</button>
+            </div>
+        </div>
+
+        <!-- Strike Overlay -->
+        <div id="strike-overlay" class="overlay">
+            <div class="big-x">X</div>
+        </div>
+
+        <!-- Correct Overlay -->
+        <div id="correct-overlay" class="overlay">
+            <div class="checkmark">✓</div>
+        </div>
+    </div>
+
+    <!-- Audio elements for sound effects -->
+    <audio id="sound-correct" preload="auto">
+        <source src="data:audio/wav;base64,UklGRl9vT19teleXBhdmVmb3JtYXRjaHVuaw==" type="audio/wav">
+    </audio>
+    <audio id="sound-wrong" preload="auto">
+        <source src="data:audio/wav;base64,UklGRl9vT19teleXBhdmVmb3JtYXRjaHVuaw==" type="audio/wav">
+    </audio>
+
+    <script src="questions.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
