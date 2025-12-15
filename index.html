@@ -26,6 +26,7 @@
                 </div>
             </div>
             <button id="start-game" class="big-button">START GAME</button>
+            <button id="manage-questions-btn" class="secondary-button">Manage Questions</button>
         </div>
 
         <!-- Game Screen -->
@@ -162,6 +163,60 @@
         <!-- Correct Overlay -->
         <div id="correct-overlay" class="overlay">
             <div class="checkmark">✓</div>
+        </div>
+
+        <!-- Question Management Modal -->
+        <div id="question-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Manage Questions</h2>
+                    <button id="close-modal" class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <!-- Question List View -->
+                    <div id="question-list-view" class="view active">
+                        <div class="modal-actions">
+                            <button id="add-question-btn" class="action-btn add-btn">+ Add New Question</button>
+                            <button id="reset-questions-btn" class="action-btn reset-btn">Reset to Defaults</button>
+                        </div>
+                        <div class="question-count">
+                            Total Questions: <span id="total-questions">0</span>
+                        </div>
+                        <div id="question-list" class="question-list">
+                            <!-- Questions will be dynamically inserted here -->
+                        </div>
+                    </div>
+
+                    <!-- Question Edit View -->
+                    <div id="question-edit-view" class="view">
+                        <div class="edit-header">
+                            <button id="back-to-list" class="back-btn">&larr; Back to List</button>
+                            <h3 id="edit-title">Add New Question</h3>
+                        </div>
+                        <form id="question-form">
+                            <div class="form-group">
+                                <label for="question-input">Question:</label>
+                                <input type="text" id="question-input" placeholder="Enter the survey question..." maxlength="200" required>
+                            </div>
+
+                            <div class="answers-section">
+                                <div class="answers-header">
+                                    <h4>Answers (ranked by points)</h4>
+                                    <button type="button" id="add-answer-btn" class="small-btn">+ Add Answer</button>
+                                </div>
+                                <div id="answers-container">
+                                    <!-- Answer inputs will be dynamically inserted here -->
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" id="save-question-btn" class="action-btn save-btn">Save Question</button>
+                                <button type="button" id="cancel-edit-btn" class="action-btn cancel-btn">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

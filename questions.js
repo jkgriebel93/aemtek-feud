@@ -2,7 +2,8 @@
 // Each question has answers sorted by popularity (points)
 // 'accepted' array contains alternative acceptable answers
 
-const QUESTIONS = [
+// Default questions that ship with the game
+const DEFAULT_QUESTIONS = [
     {
         question: "Name something people do to relax after a long day at work.",
         answers: [
@@ -293,3 +294,90 @@ const QUESTIONS = [
         ]
     }
 ];
+
+// Question Manager - handles localStorage persistence
+class QuestionManager {
+    constructor() {
+        this.storageKey = 'familyFeud_questions';
+        this.questions = this.loadQuestions();
+    }
+
+    // Load questions from localStorage, falling back to defaults
+    loadQuestions() {
+        try {
+            const stored = localStorage.getItem(this.storageKey);
+            if (stored) {
+                const parsed = JSON.parse(stored);
+                if (Array.isArray(parsed) && parsed.length > 0) {
+                    return parsed;
+                }
+            }
+        } catch (e) {
+            console.warn('Failed to load questions from localStorage:', e);
+        }
+        return JSON.parse(JSON.stringify(DEFAULT_QUESTIONS));
+    }
+
+    // Save questions to localStorage
+    saveQuestions() {
+        try {
+            localStorage.setItem(this.storageKey, JSON.stringify(this.questions));
+        } catch (e) {
+            console.error('Failed to save questions to localStorage:', e);
+        }
+    }
+
+    // Get all questions
+    getAll() {
+        return this.questions;
+    }
+
+    // Get a single question by index
+    get(index) {
+        return this.questions[index];
+    }
+
+    // Add a new question
+    add(question) {
+        this.questions.push(question);
+        this.saveQuestions();
+        return this.questions.length - 1;
+    }
+
+    // Update a question at a specific index
+    update(index, question) {
+        if (index >= 0 && index < this.questions.length) {
+            this.questions[index] = question;
+            this.saveQuestions();
+            return true;
+        }
+        return false;
+    }
+
+    // Delete a question at a specific index
+    delete(index) {
+        if (index >= 0 && index < this.questions.length) {
+            this.questions.splice(index, 1);
+            this.saveQuestions();
+            return true;
+        }
+        return false;
+    }
+
+    // Reset to default questions
+    resetToDefaults() {
+        this.questions = JSON.parse(JSON.stringify(DEFAULT_QUESTIONS));
+        this.saveQuestions();
+    }
+
+    // Get the count of questions
+    count() {
+        return this.questions.length;
+    }
+}
+
+// Initialize the question manager
+const questionManager = new QuestionManager();
+
+// For backwards compatibility, QUESTIONS now references the manager's data
+const QUESTIONS = questionManager.getAll();
