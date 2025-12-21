@@ -524,9 +524,6 @@ class QuestionManagementUI {
         // Modal open/close
         this.manageBtn.addEventListener('click', () => this.openModal());
         this.closeBtn.addEventListener('click', () => this.closeModal());
-        this.modal.addEventListener('click', (e) => {
-            if (e.target === this.modal) this.closeModal();
-        });
 
         // List view actions
         this.addQuestionBtn.addEventListener('click', () => this.showAddForm());
@@ -677,7 +674,7 @@ class QuestionManagementUI {
 
     updateAnswerNumbers() {
         this.answersContainer.querySelectorAll('.answer-entry').forEach((entry, index) => {
-            entry.querySelector('.answer-entry-number').textContent = index + 1;
+            entry.querySelector('.answer-entry-number').textContent = (index + 1).toString();
         });
     }
 
